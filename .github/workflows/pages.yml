@@ -25,6 +25,46 @@ jobs:
           cache-dependency-path: duck-film/package-lock.json
       - run: npm ci
       - run: npm run preview:build
+      # The mixed preview soundtrack is published with the site, but the
+      # individual source recordings never enter the public Git history.
+      - name: Restore mixed preview soundtrack
+        env:
+          DUCK_AUDIO_00: ${{ secrets.DUCK_AUDIO_00 }}
+          DUCK_AUDIO_01: ${{ secrets.DUCK_AUDIO_01 }}
+          DUCK_AUDIO_02: ${{ secrets.DUCK_AUDIO_02 }}
+          DUCK_AUDIO_03: ${{ secrets.DUCK_AUDIO_03 }}
+          DUCK_AUDIO_04: ${{ secrets.DUCK_AUDIO_04 }}
+          DUCK_AUDIO_05: ${{ secrets.DUCK_AUDIO_05 }}
+          DUCK_AUDIO_06: ${{ secrets.DUCK_AUDIO_06 }}
+          DUCK_AUDIO_07: ${{ secrets.DUCK_AUDIO_07 }}
+          DUCK_AUDIO_08: ${{ secrets.DUCK_AUDIO_08 }}
+          DUCK_AUDIO_09: ${{ secrets.DUCK_AUDIO_09 }}
+          DUCK_AUDIO_10: ${{ secrets.DUCK_AUDIO_10 }}
+          DUCK_AUDIO_11: ${{ secrets.DUCK_AUDIO_11 }}
+          DUCK_AUDIO_12: ${{ secrets.DUCK_AUDIO_12 }}
+          DUCK_AUDIO_13: ${{ secrets.DUCK_AUDIO_13 }}
+          DUCK_AUDIO_14: ${{ secrets.DUCK_AUDIO_14 }}
+          DUCK_AUDIO_15: ${{ secrets.DUCK_AUDIO_15 }}
+          DUCK_AUDIO_16: ${{ secrets.DUCK_AUDIO_16 }}
+          DUCK_AUDIO_17: ${{ secrets.DUCK_AUDIO_17 }}
+          DUCK_AUDIO_18: ${{ secrets.DUCK_AUDIO_18 }}
+          DUCK_AUDIO_19: ${{ secrets.DUCK_AUDIO_19 }}
+          DUCK_AUDIO_20: ${{ secrets.DUCK_AUDIO_20 }}
+          DUCK_AUDIO_21: ${{ secrets.DUCK_AUDIO_21 }}
+          DUCK_AUDIO_22: ${{ secrets.DUCK_AUDIO_22 }}
+          DUCK_AUDIO_23: ${{ secrets.DUCK_AUDIO_23 }}
+          DUCK_AUDIO_24: ${{ secrets.DUCK_AUDIO_24 }}
+          DUCK_AUDIO_25: ${{ secrets.DUCK_AUDIO_25 }}
+          DUCK_AUDIO_26: ${{ secrets.DUCK_AUDIO_26 }}
+          DUCK_AUDIO_27: ${{ secrets.DUCK_AUDIO_27 }}
+          DUCK_AUDIO_28: ${{ secrets.DUCK_AUDIO_28 }}
+          DUCK_AUDIO_29: ${{ secrets.DUCK_AUDIO_29 }}
+        run: |
+          for index in $(seq -w 0 29); do
+            name="DUCK_AUDIO_${index}"
+            printf '%s' "${!name}"
+          done | base64 --decode > dist/voiceover.m4a
+          echo '7ce51ffe607598c12ec051d8b360f36fbc30d32d2f02c9c153646a9dfc21ce39  dist/voiceover.m4a' | sha256sum --check --status
       - uses: actions/upload-pages-artifact@v3
         with:
           path: duck-film/dist
