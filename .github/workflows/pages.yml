@@ -18,6 +18,8 @@ jobs:
         working-directory: duck-film
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -65,6 +67,51 @@ jobs:
             printf '%s' "${!name}"
           done | base64 --decode > dist/voiceover.m4a
           echo '7ce51ffe607598c12ec051d8b360f36fbc30d32d2f02c9c153646a9dfc21ce39  dist/voiceover.m4a' | sha256sum --check --status
+      - name: Restore materials for downloadable films
+        env:
+          DUCK_LETTER_JSON: ${{ secrets.DUCK_LETTER_JSON }}
+          DUCK_LILY_00: ${{ secrets.DUCK_LILY_00 }}
+          DUCK_LILY_01: ${{ secrets.DUCK_LILY_01 }}
+          DUCK_LILY_02: ${{ secrets.DUCK_LILY_02 }}
+          DUCK_LILY_03: ${{ secrets.DUCK_LILY_03 }}
+          DUCK_LILY_04: ${{ secrets.DUCK_LILY_04 }}
+          DUCK_LILY_05: ${{ secrets.DUCK_LILY_05 }}
+          DUCK_LILY_06: ${{ secrets.DUCK_LILY_06 }}
+          DUCK_LILY_07: ${{ secrets.DUCK_LILY_07 }}
+          DUCK_LILY_08: ${{ secrets.DUCK_LILY_08 }}
+          DUCK_LILY_09: ${{ secrets.DUCK_LILY_09 }}
+          DUCK_LILY_10: ${{ secrets.DUCK_LILY_10 }}
+          DUCK_LILY_11: ${{ secrets.DUCK_LILY_11 }}
+          DUCK_LILY_12: ${{ secrets.DUCK_LILY_12 }}
+          DUCK_LILY_13: ${{ secrets.DUCK_LILY_13 }}
+          DUCK_LILY_14: ${{ secrets.DUCK_LILY_14 }}
+          DUCK_LILY_15: ${{ secrets.DUCK_LILY_15 }}
+          DUCK_LILY_16: ${{ secrets.DUCK_LILY_16 }}
+          DUCK_LILY_17: ${{ secrets.DUCK_LILY_17 }}
+          DUCK_LILY_18: ${{ secrets.DUCK_LILY_18 }}
+          DUCK_LILY_19: ${{ secrets.DUCK_LILY_19 }}
+          DUCK_LILY_20: ${{ secrets.DUCK_LILY_20 }}
+          DUCK_LILY_21: ${{ secrets.DUCK_LILY_21 }}
+          DUCK_LILY_22: ${{ secrets.DUCK_LILY_22 }}
+          DUCK_LILY_23: ${{ secrets.DUCK_LILY_23 }}
+          DUCK_LILY_24: ${{ secrets.DUCK_LILY_24 }}
+          DUCK_LILY_25: ${{ secrets.DUCK_LILY_25 }}
+          DUCK_LILY_26: ${{ secrets.DUCK_LILY_26 }}
+          DUCK_LILY_27: ${{ secrets.DUCK_LILY_27 }}
+          DUCK_LILY_28: ${{ secrets.DUCK_LILY_28 }}
+          DUCK_LILY_29: ${{ secrets.DUCK_LILY_29 }}
+          DUCK_LILY_30: ${{ secrets.DUCK_LILY_30 }}
+          DUCK_LILY_31: ${{ secrets.DUCK_LILY_31 }}
+        run: |
+          mkdir -p public/private-cues out
+          printf '%s' "$DUCK_LETTER_JSON" > public/private-cues/letter.json
+          for index in $(seq -w 0 31); do
+            name="DUCK_LILY_${index}"
+            printf '%s' "${!name}"
+          done | base64 --decode > out/lily-only.m4a
+          echo '7847858937328b69611369e9869ad40de1aacb74353964e88356c98c8e9ca571  out/lily-only.m4a' | sha256sum --check --status
+      - name: Render downloadable films
+        run: bash scripts/render_downloads.sh
       - uses: actions/upload-pages-artifact@v3
         with:
           path: duck-film/dist
