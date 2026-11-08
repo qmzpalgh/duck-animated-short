@@ -1,6 +1,6 @@
 # Duck
 
-A 2D animated short built with Remotion, using code-drawn puppets and backgrounds. The public preview offers both the silent cut and a voiceover cut with all 17 supplied cues. The letter is blank on screen, and the original screenplay and audio files are not included in this repository.
+A 2D animated short built with Remotion, using code-drawn puppets and backgrounds. The shot sequence draws on the director's storyboard. The public preview offers both the silent cut and a voiceover cut with all 17 supplied cues. The letter is blank on screen, and the original screenplay, storyboard images, and audio files are not included in this repository.
 
 [Watch the public preview](https://qmzpalgh.github.io/duck-animated-short/)
 

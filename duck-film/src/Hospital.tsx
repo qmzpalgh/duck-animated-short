@@ -1,5 +1,6 @@
 import React from 'react';
 import {C, Duck, Person, Wall, Window} from './Art';
+import {DuckClose} from './StoryArt';
 import {Stage, ease, useSeconds} from './Stage';
 
 const Trolley: React.FC<{x:number}> = ({x}) => <g transform={`translate(${x} 450)`} stroke={C.ink} strokeWidth="4" strokeLinejoin="round">
@@ -68,7 +69,34 @@ const CareCloseup: React.FC<{t:number}> = ({t}) => {
 
 export const LastHospital: React.FC = () => {
   const t = useSeconds();
-  if (t >= 6.2 && t < 13.5) return <CareCloseup t={t}/>;
+  if (t < 3.4) return <Stage>
+    <rect width="1280" height="720" fill="#c3d1c5"/><g transform="translate(220 50) rotate(-8 430 300)" stroke={C.ink} strokeWidth="5" strokeLinejoin="round" strokeLinecap="round">
+      <rect x="65" y="65" width="770" height="540" rx="30" fill="#e4e9db"/><rect x="360" y="85" width="180" height="125" rx="35" fill={C.white}/>
+      <path d="M366 212 Q445 180 525 212 L587 397 L555 463 L520 453 L514 560 H458 L447 453 L423 453 L411 560 H356 L352 453 L320 465 L303 397Z" fill={C.cream}/>
+      <path d="M355 231 H540 M346 269 H551 M337 307 H563 M329 345 H574 M349 407 H544 M367 486 H410 M465 486 H511" stroke="#bcc9ba" strokeWidth="3"/>
+      <circle cx="450" cy="157" r="57" fill="#e8b99a"/><path d="M394 139 Q397 88 448 91 Q501 90 507 139" fill="#554c46"/><path d="M395 130 H505 V151 H395Z" fill={C.cream}/><circle cx="431" cy="164" r="4" fill={C.ink}/><circle cx="470" cy="164" r="4" fill={C.ink}/><path d="M431 188 Q450 182 469 188" fill="none"/>
+      <path d="M680 20 V170 M646 207 L680 160 L714 207Z" fill="none" stroke="#798c82" strokeWidth="9"/>
+      <rect x="610" y="330" width="155" height="100" rx="3" fill="#c4ad92"/><path d="M670 355 h35 l-4 45 h-27Z" fill={C.ochre}/>
+    </g>
+  </Stage>;
+  if (t < 6.2) return <Stage>
+    <rect width="1280" height="720" fill="#a8bdb0"/><ellipse cx="650" cy="605" rx="260" ry="40" fill="#819b8d" opacity=".3"/>
+    <g transform="translate(640 405)" stroke={C.ink} strokeWidth="6" strokeLinejoin="round"><path d="M-125 -210 H125 L92 165 Q0 202 -92 165Z" fill={C.white}/><path d="M-108 -92 H108 L83 149 Q0 180 -83 149 Z" fill={C.ochre}/><ellipse cy="-92" rx="108" ry="18" fill="#e8bd72"/><path d="M25 -120 L90 -320 L167 -320" fill="none" stroke={C.cream} strokeWidth="15"/></g>
+  </Stage>;
+  if (t >= 6.2 && t < 9.5) return <CareCloseup t={t}/>;
+  if (t >= 9.5 && t < 11.6) return <Stage>
+    <Wall color="#d6dfd0" floor="#b8b8a8" stripes={false}/><Person x={710} y={860} scale={2.1} kind="cleaner" mood="sad" arm={25}/><path d="M925 650 L850 135" stroke={C.brown} strokeWidth="20" strokeLinecap="round"/><path d="M140 590 l60 -125 l75 125Z" fill={C.ochre} stroke={C.ink} strokeWidth="5"/><path d="M187 555 l19 -35 l19 35Z" fill="none" stroke={C.ink} strokeWidth="4"/>
+  </Stage>;
+  if (t >= 11.6 && t < 13.5) return <CareCloseup t={t}/>;
+  if (t >= 13.5 && t < 16.1) return <Stage>
+    <rect width="1280" height="720" fill="#ba987d"/><path d="M0 140 H1280 M0 510 H1280" stroke="#a47f69" strokeWidth="5" opacity=".6"/><ellipse cx="590" cy="415" rx="130" ry="50" fill="none" stroke="#95725e" strokeWidth="14" opacity={1-ease(t,14.3,15.7)}/>
+    <g transform={`translate(${1180-550*ease(t,13.7,15.1)} 430) rotate(-8)`}><path d="M-180 -75 Q-90 -105 25 -50 L100 60 L-120 95 L-205 20Z" fill={C.cream} stroke={C.ink} strokeWidth="5"/><path d="M300 -210 Q150 -160 40 -60 L-45 -25" fill="none" stroke="#a86c54" strokeWidth="78" strokeLinecap="round"/><circle cx="-45" cy="-25" r="43" fill="#a86c54" stroke={C.ink} strokeWidth="4"/></g>
+  </Stage>;
+  if (t >= 19) return <Stage>
+    <rect width="1280" height="720" fill="#9dbcb2"/><path d="M0 460 Q500 400 1280 470 V720 H0Z" fill="#80a394"/>
+    {t<21.2 ? <Duck x={675} y={620} scale={2.05} face={-1} tilt={-2}/> : <DuckClose x={760+390*ease(t,22.4,24)} y={330} scale={2.4} blink={t>21.8&&t<22.5}/>}
+    {Array.from({length:10},(_,i)=>i===(t<21.2?4:5) ? null : <g key={i}><rect x={i*142-24} y="0" width="83" height="720" fill="#eee9d9" stroke="#a9b5a5" strokeWidth="3"/><path d={`M${i*142+50} 0 V720`} stroke="#c9d1c5" strokeWidth="3"/></g>)}
+  </Stage>;
   const arrival = ease(t, 2.5, 5);
   const cleaning = ease(t, 13.8, 15.5);
   const heart = ease(t, 16.4, 17.2);

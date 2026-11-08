@@ -21,7 +21,7 @@ export const Person: React.FC<PersonProps> = ({
   const cleaner = kind === 'cleaner';
   const doctor = kind === 'doctor';
   const skin = cleaner ? '#a86c54' : doctor ? '#c59a7a' : '#e8b99a';
-  const coat = cleaner ? '#659a90' : doctor ? '#e8e5d7' : '#596b70';
+  const coat = cleaner ? '#659a90' : doctor ? '#e8e5d7' : '#d9d5c5';
   const trousers = cleaner ? '#426660' : '#3b4e52';
   const bodyWidth = cleaner ? 1.18 : 1;
   const eyelid = mood === 'sad' ? 0.75 : 1;
@@ -39,7 +39,7 @@ export const Person: React.FC<PersonProps> = ({
     <g transform={`scale(${bodyWidth} 1)`}>
       <path d="M-39 -189 Q-52 -174 -49 -121 L-52 -80 Q-2 -68 52 -80 L49 -121 Q52 -174 39 -189 Q0 -201 -39 -189" fill={coat}/>
       <path d="M-20 -188 L0 -159 L20 -188" fill={C.cream}/>
-      {!cleaner && !doctor && <><path d="M0 -175 L-8 -145 L0 -127 L8 -145 Z" fill={C.coral}/><path d="M-43 -185 L-19 -169 L-32 -149 L-11 -120 M43 -185 L19 -169 L32 -149 L11 -120" fill="none"/></>}
+      {!cleaner && !doctor && <><path d="M0 -175 L-8 -145 L0 -127 L8 -145 Z" fill={C.darkTeal}/><path d="M-43 -185 L-19 -169 L-32 -149 L-11 -120 M43 -185 L19 -169 L32 -149 L11 -120" fill="none"/></>}
       {cleaner && <><path d="M-28 -179 Q0 -157 28 -179" fill="none" stroke={C.cream} strokeWidth="6"/><rect x="-23" y="-127" width="46" height="30" rx="4" fill="#7bad9e"/></>}
       {doctor && <><path d="M0 -159 L0 -83 M-32 -135 L-10 -135" fill="none"/><circle cx="27" cy="-145" r="7" fill={C.coral}/></>}
     </g>
@@ -55,14 +55,15 @@ export const Person: React.FC<PersonProps> = ({
     <path d="M-13 -204 L-13 -184 Q0 -174 13 -184 L13 -204" fill={skin}/>
     {/* Face is a single cut-paper shape; brows and mouth carry expression. */}
     <g transform="translate(0 -238)">
-      {cleaner ? <path d="M-39 -19 Q-45 -65 0 -67 Q45 -65 40 -19 L37 4 L-37 4 Z" fill="#393735"/> :
+      {cleaner ? <path d="M-39 -19 Q-49 -65 0 -67 Q49 -65 40 -19 L45 15 Q35 30 28 25 L-28 25 Q-38 30 -45 15 Z" fill="#393735"/> :
         <path d="M-38 -25 Q-37 -61 0 -60 Q37 -60 38 -25 L34 -10 L-34 -10 Z" fill={doctor ? '#6c5b50' : '#514b45'}/>}
       <path d="M-35 -24 Q-35 -52 0 -52 Q35 -52 35 -24 L34 2 Q31 30 0 34 Q-31 30 -34 2 Z" fill={skin}/>
       <path d="M-35 -24 Q-35 -54 -7 -54 Q-22 -38 -35 -34 M35 -24 Q35 -54 8 -54 Q24 -42 35 -34" fill={cleaner ? '#393735' : doctor ? '#6c5b50' : '#514b45'}/>
+      {!cleaner && !doctor && <path d="M-36 -35 Q-38 -55 -25 -58 Q-17 -69 -7 -59 Q3 -69 12 -59 Q26 -65 32 -51 Q40 -43 34 -31 Q25 -34 20 -43 Q12 -34 5 -44 Q-2 -34 -10 -45 Q-18 -35 -26 -44 Z" fill="#514b45"/>}
       <ellipse cx="-15" cy="-12" rx="7" ry={5 * eyelid} fill={C.white}/>
       <ellipse cx="15" cy="-12" rx="7" ry={5 * eyelid} fill={C.white}/>
       <circle cx="-14" cy="-11" r="2.3" fill={C.ink}/><circle cx="16" cy="-11" r="2.3" fill={C.ink}/>
-      <path d={mood === 'sad' ? 'M-22 -24 L-9 -21 M9 -21 L22 -24' : mood === 'startled' ? 'M-23 -26 Q-16 -31 -9 -26 M9 -26 Q16 -31 23 -26' : 'M-22 -23 L-9 -24 M9 -24 L22 -23'} fill="none"/>
+      <path d={mood === 'sad' ? 'M-22 -20 L-9 -24 M9 -24 L22 -20' : mood === 'startled' ? 'M-23 -26 Q-16 -31 -9 -26 M9 -26 Q16 -31 23 -26' : 'M-22 -23 L-9 -24 M9 -24 L22 -23'} fill="none"/>
       <path d="M1 -9 L-2 3 L4 4" fill="none" strokeWidth="2"/>
       <path d={mouth} fill="none"/>
       {bandage && <><path d="M-36 -34 L34 -40 L36 -18 L-34 -12 Z" fill={C.cream}/><path d="M-14 -35 L-11 -15 M1 -37 L4 -17 M16 -38 L19 -19" stroke="#c1c2ae" strokeWidth="2"/></>}
@@ -75,12 +76,12 @@ export const Duck: React.FC<DuckProps> = ({x, y, scale = 1, flap = 0, tilt = 0, 
   <g transform={`translate(${x} ${y}) scale(${scale * face} ${scale}) rotate(${tilt})`} stroke={C.ink} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
     <path d="M-22 -8 L-25 7 L-39 12 L-18 12 L-11 7 M17 -8 L14 8 L2 12 L23 12 L29 7" fill={C.orange}/>
     <ellipse cx="0" cy="-33" rx="58" ry="37" fill={C.white}/>
-    <path d="M32 -45 Q22 -64 29 -84 Q34 -101 50 -99 Q67 -99 67 -83 L67 -50 Q62 -28 43 -24" fill={C.white}/>
-    <path d="M66 -84 Q86 -80 91 -73 Q79 -65 65 -70 Z" fill={C.orange}/>
+    <path d="M27 -44 Q22 -69 28 -91 Q33 -111 50 -111 Q67 -110 66 -91 L65 -49 Q61 -28 43 -24" fill={C.white}/>
+    <path d="M64 -96 Q89 -93 102 -84 Q87 -76 64 -79 Z" fill={C.orange}/>
     <path d="M-54 -46 L-68 -61 Q-70 -41 -55 -29" fill={C.white}/>
     <g transform={`translate(-3 -42) rotate(${flap})`}><path d="M-36 0 Q-8 -23 21 -3 Q2 22 -25 17 Z" fill="#e7dbc7"/><path d="M-22 7 Q-6 12 8 5" fill="none" stroke="#b7ad9d" strokeWidth="2"/></g>
-    {blink ? <path d="M49 -84 L58 -84" fill="none"/> : <><circle cx="54" cy="-84" r="5" fill={C.white}/><circle cx="55" cy="-84" r="2" fill={C.ink}/></>}
-    <path d="M49 -95 L59 -96" fill="none" strokeWidth="2"/>
+    {blink ? <path d="M48 -95 L57 -95" fill="none"/> : <><circle cx="53" cy="-95" r="5" fill={C.white}/><circle cx="54" cy="-95" r="2" fill={C.ink}/></>}
+    <path d="M47 -105 L57 -106" fill="none" strokeWidth="2"/>
   </g>;
 
 export const Wall: React.FC<{color?: string; floor?: string; stripes?: boolean}> = ({color = '#d7c6ae', floor = C.floor, stripes = true}) =>
