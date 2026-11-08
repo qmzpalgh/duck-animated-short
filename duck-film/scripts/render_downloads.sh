@@ -9,7 +9,8 @@ npx remotion render out/earlier/src/index.ts Duck-Silent dist/downloads/01-origi
 npx remotion render src/index.ts Duck-Silent dist/downloads/04-storyboard-silent.mp4 --codec=h264 --crf=20 --concurrency=2 --log=error
 
 add_audio() {
-  ffmpeg -v error -y -i "$1" -i "$2" -map 0:v:0 -map 1:a:0 -c copy -movflags +faststart -shortest "$3"
+  # Remotion ships its own FFmpeg; the hosted runners no longer include one.
+  npx remotion ffmpeg -v error -y -i "$1" -i "$2" -map 0:v:0 -map 1:a:0 -c copy -movflags +faststart -shortest "$3"
 }
 add_audio dist/downloads/01-original-silent.mp4 out/lily-only.m4a dist/downloads/02-original-lily-voiceover.mp4
 add_audio dist/downloads/01-original-silent.mp4 dist/voiceover.m4a dist/downloads/03-original-all-cues.mp4
