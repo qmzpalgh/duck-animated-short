@@ -1,0 +1,13 @@
+# Source material supplied for this production stays local.
+*.pdf
+*.zip
+*.wav
+*.m4a
+*.mp3
+!duck-film/public/score.mp3
+
+# The Remotion project has its own ignore rules.
+duck-film/node_modules/
+duck-film/out/
+duck-film/dist/
+duck-film/public/private-cues/
