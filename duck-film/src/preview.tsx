@@ -18,6 +18,7 @@ const Preview: React.FC = () => {
     </div>
     <div className="screen"><Player key={voiceover ? 'voiced' : 'silent'} component={Film} inputProps={{includePrivate:false, voiceover, assetBase:base}} durationInFrames={TOTAL_SECONDS*FPS} fps={FPS} compositionWidth={1280} compositionHeight={720} controls style={{width:'100%', aspectRatio:'16 / 9'}}/></div>
     <div className="caption"><span>THE PUBLIC PREVIEW</span><p>The preview keeps the letter blank on screen. The downloadable films include the full letter; the original source files stay out of the repository.</p></div>
+    <a className="three-d" href={`${base}3d/`}><span><b>New: Duck in three dimensions</b>The same story as a silent, interactive 3D film. Turn the sets around, and help the duck along.</span><span className="go">Open the 3D film →</span></a>
     <section className="downloads" aria-labelledby="downloads-heading">
       <div className="downloads-heading">
         <div><p className="eyebrow">FOR THE DIRECTOR</p><h2 id="downloads-heading">Download the films</h2><p>Five MP4 versions, ready to share.</p></div>
